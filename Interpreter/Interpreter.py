@@ -7,7 +7,7 @@ SOURCE = "test.txt"
 ops = [
 "NOP", "IF", "NOTIF", "ELSE", "ENDIF", "WHILE", "ENDWHILE", "DO", "DOWHILE",
 "DEBUG", "RETURN",
-"DEPTH", "DROP", "ROT", "REVROT", "SWAP",
+"DEPTH", "DROP", "ROT", "REVROT", "SWAP", "DUP",
 "INVERT", "AND", "OR", "XOR", "RSHIFT", "LSHIFT",
 "MAX", "MIN", "GREATERTHANOREQUAL", "GREATERTHAN", "LESSTHANOREQUAL", "LESSTHAN", "EQUAL", "NOTEQUAL",
 "BOOLOR", "BOOLAND", "ONOTEQUAL",
@@ -181,6 +181,8 @@ while cp < len(commands):
             t1 = s.pop()
             s.push( t0 )
             s.push( t1 )
+        elif c == "DUP":
+            s.push( s.peek() )
         
         
         #Section
