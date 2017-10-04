@@ -4,6 +4,7 @@ class Stack:
     
     def rotate(self, n):
         if self.height() != 0:
+            n = n % self.height()
             self.s = self.s[n:] + self.s[:n]
     
     def push(self, item):
