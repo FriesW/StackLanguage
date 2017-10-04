@@ -214,25 +214,38 @@ while cp < len(commands):
         elif c == "ONOTEQUAL":
         
         elif c == "NOT":
-        
+        '''
         
         #Section
         elif c == "MOD":
-        
+            t0 = s.pop()
+            t1 = s.pop()
+            s.push( t1 % t0 )
         elif c == "DIV":
-        
+            t0 = s.pop()
+            t1 = s.pop()
+            s.push( t1 / t0 )
         elif c == "MUL":
-        
+            t0 = s.pop()
+            t1 = s.pop()
+            s.push( t1 * t0 )
         elif c == "EXP":
-        
+            t0 = s.pop()
+            t1 = s.pop()
+            s.push( t1 ** t0 )
         elif c == "SUB":
-        
+            t0 = s.pop()
+            t1 = s.pop()
+            s.push( t1 - t0 )
         elif c == "ADD":
-        
+            t0 = s.pop()
+            t1 = s.pop()
+            s.push( t1 + t0 )
         elif c == "ABS":
-        
+            s.push( abs(s.pop()) )
         elif c == "NEGATE":
-        '''
+            s.push( -s.pop() )
+        
         
         else:
             s.push( int(c) )
