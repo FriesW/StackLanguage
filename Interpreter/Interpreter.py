@@ -158,22 +158,29 @@ while cp < len(commands):
         #Section
         if c == "DEBUG":
             print "== STACK BOTTOM ==\n" + s.contents() + "== STACK TOP ==\n"
-            comment_bullshit = '''
         elif c == "RETURN":
-        
+            cp = len(commands) #Terminate
+            print "Execution halted " + \
+                ( "VALID" if s.peek() != 0 else "INVALID" ) + \
+                " with stack:\n== STACK BOTTOM ==\n" + \
+                s.contents() + \
+                "== STACK TOP ==\n"
         
         #Section
         elif c == "DEPTH":
-        
+            s.push( s.height() )
         elif c == "DROP":
-        
+            s.pop()
         elif c == "ROT":
-        
+            s.rotate( -s.pop() )
         elif c == "REVROT":
-        
+            s.rotate( s.pop() )
         elif c == "SWAP":
-        
-        
+            t0 = s.pop()
+            t1 = s.pop()
+            s.push( t0 )
+            s.push( t1 )
+            comment_bullshit = '''
         #Section
         elif c == "INVERT":
         
