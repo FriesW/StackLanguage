@@ -151,89 +151,90 @@ while cp < len(commands):
         else:
             if s.pop() != 0:
                 cp = top[0]
-            
+    
+    elif not skip:
     
     
-    #Section
-    elif c == "DEBUG":
-        print "== STACK BOTTOM ==\n" + s.contents() + "== STACK TOP ==\n"
-        comment_bullshit = '''
-    elif c == "RETURN":
-    
-    
-    #Section
-    elif c == "DEPTH":
-    
-    elif c == "DROP":
-    
-    elif c == "ROT":
-    
-    elif c == "REVROT":
-    
-    elif c == "SWAP":
-    
-    
-    #Section
-    elif c == "INVERT":
-    
-    elif c == "AND":
-    
-    elif c == "OR":
-    
-    elif c == "XOR":
-    
-    elif c == "RSHIFT":
-    
-    elif c == "LSHIFT":
-    
-    
-    #Section
-    elif c == "MAX":
-    
-    elif c == "MIN":
-    
-    elif c == "GREATERTHANOREQUAL":
-    
-    elif c == "GREATERTHAN":
-    
-    elif c == "LESSTHANOREQUAL":
-    
-    elif c == "LESSTHAN":
-    
-    elif c == "EQUAL":
-    
-    elif c == "NOTEQUAL":
-    
-    
-    #Section
-    elif c == "BOOLOR":
-    
-    elif c == "BOOLAND":
+        #Section
+        if c == "DEBUG":
+            print "== STACK BOTTOM ==\n" + s.contents() + "== STACK TOP ==\n"
+            comment_bullshit = '''
+        elif c == "RETURN":
         
-    elif c == "ONOTEQUAL":
-    
-    elif c == "NOT":
-    
-    
-    #Section
-    elif c == "MOD":
-    
-    elif c == "DIV":
-    
-    elif c == "MUL":
-    
-    elif c == "EXP":
-    
-    elif c == "SUB":
-    
-    elif c == "ADD":
-    
-    elif c == "ABS":
-    
-    elif c == "NEGATE":
-    '''
-    
-    else:
-        s.push( int(c) )
+        
+        #Section
+        elif c == "DEPTH":
+        
+        elif c == "DROP":
+        
+        elif c == "ROT":
+        
+        elif c == "REVROT":
+        
+        elif c == "SWAP":
+        
+        
+        #Section
+        elif c == "INVERT":
+        
+        elif c == "AND":
+        
+        elif c == "OR":
+        
+        elif c == "XOR":
+        
+        elif c == "RSHIFT":
+        
+        elif c == "LSHIFT":
+        
+        
+        #Section
+        elif c == "MAX":
+        
+        elif c == "MIN":
+        
+        elif c == "GREATERTHANOREQUAL":
+        
+        elif c == "GREATERTHAN":
+        
+        elif c == "LESSTHANOREQUAL":
+        
+        elif c == "LESSTHAN":
+        
+        elif c == "EQUAL":
+        
+        elif c == "NOTEQUAL":
+        
+        
+        #Section
+        elif c == "BOOLOR":
+        
+        elif c == "BOOLAND":
+            
+        elif c == "ONOTEQUAL":
+        
+        elif c == "NOT":
+        
+        
+        #Section
+        elif c == "MOD":
+        
+        elif c == "DIV":
+        
+        elif c == "MUL":
+        
+        elif c == "EXP":
+        
+        elif c == "SUB":
+        
+        elif c == "ADD":
+        
+        elif c == "ABS":
+        
+        elif c == "NEGATE":
+        '''
+        
+        else:
+            s.push( int(c) )
     
     cp += 1
