@@ -185,9 +185,9 @@ while cp < len(commands):
         elif c == "DUP":
             s.push( s.peek() )
         elif c == "PICK":
-        
+            s.pick( s.pop() )
         elif c == "ROLL":
-        
+            s.roll( s.pop() )
         elif c == "TOALT":
             alt.push( s.pop() )
         elif c == "FROMALT":
