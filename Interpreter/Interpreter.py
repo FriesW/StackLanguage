@@ -1,6 +1,12 @@
 from Stack import Stack
 
-ops = ["NOP", "IF", "NOTIF", "ELSE"]
+ops = [
+"NOP", "IF", "NOTIF", "ELSE", "ENDIF", "WHILE", "ENDWHILE", "DO", "DOWHILE",
+"DEBUG", "RETURN",
+"DEPTH", "DROP", "ROT", "REVROT", "SWAP",
+"INVERT", "AND", "OR", "XOR", "RSHIFT", "LSHIFT",
+"MAX", "MIN", "GREATERTHANOREQUAL", "GREATERTHAN", "LESSTHANOREQUAL", "LESSTHAN", "EQUAL", "NOTEQUAL",
+"BOOLOR", "BOOLAND", "MOD", "DIV", "MUL", "EXP", "SUB", "ADD", "ONOTEQUAL", "NOT", "ABS", "NEGATE"]
 
 #Read in file
 
@@ -54,12 +60,13 @@ for c in commands:
 
     
 #Evaluate
+s = Stack() #data stack
 n = Stack() #n for Nesting
 cp = 0 #Command pointer
 while cp < len(commands):
     c = commands[cp]
     
-    
+    #Section
     if c == "NOP":
         pass
     elif c == "IF":
@@ -70,5 +77,91 @@ while cp < len(commands):
     
     elif c == "ENDIF":
         n.pop()
+    elif c == "WHILE":
+    
+    elif c == "ENDWHILE":
+    
+    elif c == "DO":
+    
+    elif c == "DOWHILE":
+    
+    
+    #Section
+    elif c == "DEBUG":
+    
+    elif c == "RETURN":
+    
+    
+    #Section
+    elif c == "DEPTH":
+    
+    elif c == "DROP":
+    
+    elif c == "ROT":
+    
+    elif c == "REVROT":
+    
+    elif c == "SWAP":
+    
+    
+    #Section
+    elif c == "INVERT":
+    
+    elif c == "AND":
+    
+    elif c == "OR":
+    
+    elif c == "XOR":
+    
+    elif c == "RSHIFT":
+    
+    elif c == "LSHIFT":
+    
+    
+    #Section
+    elif c == "MAX":
+    
+    elif c == "MIN":
+    
+    elif c == "GREATERTHANOREQUAL":
+    
+    elif c == "GREATERTHAN":
+    
+    elif c == "LESSTHANOREQUAL":
+    
+    elif c == "LESSTHAN":
+    
+    elif c == "EQUAL":
+    
+    elif c == "NOTEQUAL":
+    
+    
+    #Section
+    elif c == "BOOLOR":
+    
+    elif c == "BOOLAND":
+    
+    elif c == "MOD":
+    
+    elif c == "DIV":
+    
+    elif c == "MUL":
+    
+    elif c == "EXP":
+    
+    elif c == "SUB":
+    
+    elif c == "ADD":
+    
+    elif c == "ONOTEQUAL":
+    
+    elif c == "NOT":
+    
+    elif c == "ABS":
+    
+    elif c == "NEGATE":
+    
+    else:
+        s.push( int(c) )
     
     cp += 1
