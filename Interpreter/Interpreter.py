@@ -6,7 +6,8 @@ ops = [
 "DEPTH", "DROP", "ROT", "REVROT", "SWAP",
 "INVERT", "AND", "OR", "XOR", "RSHIFT", "LSHIFT",
 "MAX", "MIN", "GREATERTHANOREQUAL", "GREATERTHAN", "LESSTHANOREQUAL", "LESSTHAN", "EQUAL", "NOTEQUAL",
-"BOOLOR", "BOOLAND", "MOD", "DIV", "MUL", "EXP", "SUB", "ADD", "ONOTEQUAL", "NOT", "ABS", "NEGATE"]
+"BOOLOR", "BOOLAND", "ONOTEQUAL",
+"NOT", "MOD", "DIV", "MUL", "EXP", "SUB", "ADD", "ABS", "NEGATE"]
 
 #Read in file
 
@@ -140,7 +141,13 @@ while cp < len(commands):
     elif c == "BOOLOR":
     
     elif c == "BOOLAND":
+        
+    elif c == "ONOTEQUAL":
     
+    elif c == "NOT":
+    
+    
+    #Section
     elif c == "MOD":
     
     elif c == "DIV":
@@ -152,10 +159,6 @@ while cp < len(commands):
     elif c == "SUB":
     
     elif c == "ADD":
-    
-    elif c == "ONOTEQUAL":
-    
-    elif c == "NOT":
     
     elif c == "ABS":
     
