@@ -64,32 +64,76 @@ for c in commands:
 s = Stack() #data stack
 n = Stack() #n for Nesting
 cp = 0 #Command pointer
+skip = False #nop override for IF/ELSE control
 while cp < len(commands):
     c = commands[cp]
     
     #Section
     if c == "NOP":
         pass
-    elif c == "IF":
-        n.append( (cp, c, 0 != s.pop()) )
-    elif c == "NOTIF":
-        n.append( (cp, c, 0 == s.pop()) )
-    elif c == "ELSE":
     
-    elif c == "ENDIF":
-        n.pop()
-    elif c == "WHILE":
-    
-    elif c == "ENDWHILE":
-    
-    elif c == "DO":
-    
-    elif c == "DOWHILE":
+    elif c == "IF": #Entry
+        if skip:
+            n.push( (cp, None) )
+        else:
+            run = 0 != s.pop()
+            skip = not run
+            n.push( (cp, run) )
+    elif c == "NOTIF": #Entry
+        if skip:
+            n.push( (cp, None) )
+        else:
+            run = 0 == s.pop()
+            skip = not run
+            n.push( (cp, run) )
+    elif c == "ELSE": #Entry/Exit
+        top = n.pop()
+        if top[1] == None: #This means we are in nested during nop
+            n.push( (cp, None) )
+        elif top[1] == False: #This means we are not nested, and our top half DIDN'T run
+            skip = False
+            n.push( (cp, True) )
+        else: #This means we are not nested, and our top half DID run
+            skip = True
+            n.push( (cp, False) )
+    elif c == "ENDIF": #Exit
+        top = n.pop()
+        if top[1] == None: #Nested during nop
+            pass
+        #Anything else, and we exit nop
+        else:
+            skip = False
+    elif c == "WHILE": #Entry
+        if skip:
+            n.push( (cp, None) )
+        else:
+            run = 0 != s.pop()
+            skip = not run
+            n.push( (cp, run) )
+    elif c == "ENDWHILE": #Exit
+        top = n.pop()
+        if top[1] == None: #Nested during nop
+            pass
+        else:
+            if top[1]: #While ran, so go again
+                cp = top[0]
+            else: #While did not run, so exit
+                skip = False
+    elif c == "DO": #Entry
+        n.push( (cp, None) )
+    elif c == "DOWHILE": #Exit
+        top = n.pop()
+        if skip: #Nested during nop
+            pass
+        else:
+            if s.pop() != 0:
+                cp = top[0]
+            
     
     
     #Section
     elif c == "DEBUG":
-    
+        print "== STACK BOTTOM ==\n" + s.contents() + "== STACK TOP ==\n"
     elif c == "RETURN":
     
     
