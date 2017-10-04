@@ -46,17 +46,23 @@ for c in commands:
     #Push IF
     elif c == "IF":
         n.push(c)
-    #ELSE must follow IF
+    #Push NOTIF
+    elif c == "NOTIF":
+        n.push(c)
+    #ELSE must follow IF or NOTIF
     elif c == "ELSE":
-        if n.height() == 0 or n.pop() != "IF":
+        if n.height() == 0:
+            evalError("Item ", pos, ": Improperly nested ELSE.")
+        last = n.pop()
+        if last != "IF" and last != "NOTIF":
             evalError("Item ", pos, ": Improperly nested ELSE.")
         n.push("ELSE")
-    #ENDIF must follow IF or ELSE
+    #ENDIF must follow IF or NOTIF or ELSE
     elif c == "ENDIF":
         if n.height() == 0:
             evalError("Item ", pos, ": Improperly nested ENDIF.")
         last = n.pop()
-        if last != "IF" and last != "ELSE":
+        if last != "IF" and last != "NOTIF" and last != "ELSE":
             evalError("Item ", pos, ": Improperly nested ENDIF.")
     #Push WHILE
     elif c == "WHILE":
@@ -84,7 +90,7 @@ cp = 0 #Command pointer
 skip = False #nop override for IF/ELSE control
 while cp < len(commands):
     c = commands[cp]
-    
+    print "Eval " + c + " and skip is: " + str(skip)
     #Section
     if c == "NOP":
         pass
