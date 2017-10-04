@@ -90,11 +90,11 @@ cp = 0 #Command pointer
 skip = False #nop override for IF/ELSE control
 while cp < len(commands):
     c = commands[cp]
-    print "Eval " + c + " and skip is: " + str(skip)
+    
+    
     #Section
     if c == "NOP":
         pass
-    
     elif c == "IF": #Entry
         if skip:
             n.push( (cp, None) )
@@ -153,8 +153,8 @@ while cp < len(commands):
                 cp = top[0] - 1
     
     elif not skip:
-    
-    
+        
+        
         #Section
         if c == "DEBUG":
             print "== STACK BOTTOM ==\n" + s.contents() + "== STACK TOP ==\n"
@@ -165,6 +165,7 @@ while cp < len(commands):
                 " with stack:\n== STACK BOTTOM ==\n" + \
                 s.contents() + \
                 "== STACK TOP ==\n"
+        
         
         #Section
         elif c == "DEPTH":
@@ -180,48 +181,84 @@ while cp < len(commands):
             t1 = s.pop()
             s.push( t0 )
             s.push( t1 )
-            comment_bullshit = '''
+        
+        
         #Section
         elif c == "INVERT":
-        
+            s.push( ~s.pop() )
         elif c == "AND":
-        
+            t0 = s.pop()
+            t1 = s.pop()
+            s.push( t0 & t1 )
         elif c == "OR":
-        
+            t0 = s.pop()
+            t1 = s.pop()
+            s.push( t0 | t1 )
         elif c == "XOR":
-        
+            t0 = s.pop()
+            t1 = s.pop()
+            s.push( t0 ^ t1 )
         elif c == "RSHIFT":
-        
+            t0 = s.pop()
+            t1 = s.pop()
+            s.push( t1 >> t0 )
         elif c == "LSHIFT":
+            t0 = s.pop()
+            t1 = s.pop()
+            s.push( t1 << t0 )
         
         
         #Section
         elif c == "MAX":
-        
+            t0 = s.pop()
+            t1 = s.pop()
+            s.push( max(t0, t1) )
         elif c == "MIN":
-        
+            t0 = s.pop()
+            t1 = s.pop()
+            s.push( max(t0, t1) )
         elif c == "GREATERTHANOREQUAL":
-        
+            t0 = s.pop()
+            t1 = s.pop()
+            s.push(int( t0 >= t1 ))
         elif c == "GREATERTHAN":
-        
+            t0 = s.pop()
+            t1 = s.pop()
+            s.push(int( t0 > t1 ))
         elif c == "LESSTHANOREQUAL":
-        
+            t0 = s.pop()
+            t1 = s.pop()
+            s.push(int( t0 <= t1 ))
         elif c == "LESSTHAN":
-        
+            t0 = s.pop()
+            t1 = s.pop()
+            s.push(int( t0 < t1 ))
         elif c == "EQUAL":
-        
+            t0 = s.pop()
+            t1 = s.pop()
+            s.push(int( t0 == t1 ))
         elif c == "NOTEQUAL":
+            t0 = s.pop()
+            t1 = s.pop()
+            s.push(int( t0 != t1 ))
         
         
         #Section
         elif c == "BOOLOR":
-        
+            t0 = bool( s.pop() )
+            t1 = bool( s.pop() )
+            s.push(int( t0 or t1 ))
         elif c == "BOOLAND":
-            
+            t0 = bool( s.pop() )
+            t1 = bool( s.pop() )
+            s.push(int( t0 and t1 ))
         elif c == "ONOTEQUAL":
-        
+            t0 = bool( s.pop() )
+            s.push(int( t0 ))
         elif c == "NOT":
-        '''
+            t0 = bool( s.pop() )
+            s.push(int( not t0 ))
+        
         
         #Section
         elif c == "MOD":
@@ -258,3 +295,5 @@ while cp < len(commands):
             s.push( int(c) )
     
     cp += 1
+
+print "TERMINATED\n"
