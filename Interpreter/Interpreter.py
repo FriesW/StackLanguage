@@ -37,7 +37,7 @@ n = Stack() #n for Nesting
 pos = 0
 for c in commands:
     pos += 1
-    ###print "S\n" + n.contents() + "E\n"
+    ###print "Eval " + c + "\n" + n.contents() + "E\n"
     if c not in ops:
         try:
             int(c)
@@ -62,7 +62,7 @@ for c in commands:
     elif c == "WHILE":
         n.push(c)
     #ENDWHILE must follow WHILE
-    elif c == "WHILE":
+    elif c == "ENDWHILE":
         if n.height() == 0 or n.pop() != "WHILE":
             evalError("Item ", pos, ": Improperly nested ENDWHILE.")
     #Push DO
@@ -70,11 +70,12 @@ for c in commands:
         n.push(c)
     #DOWHILE must follow DO
     elif c == "DOWHILE":
-        if n.height() == 0 or n.pop != "DOWHILE":
+        if n.height() == 0 or n.pop() != "DO":
             evalError("Item ", pos, ": Improperly nested DOWHILE.")
 if n.height() != 0:
     evalError("End reached with unbalanced nesting for:\n", n.contents())
 
+print "Eval done"
     
 #Evaluate
 s = Stack() #data stack
