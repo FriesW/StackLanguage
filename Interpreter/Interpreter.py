@@ -139,7 +139,7 @@ while cp < len(commands):
             pass
         else:
             if top[1]: #While ran, so go again
-                cp = top[0]
+                cp = top[0] - 1
             else: #While did not run, so exit
                 skip = False
     elif c == "DO": #Entry
@@ -150,7 +150,7 @@ while cp < len(commands):
             pass
         else:
             if s.pop() != 0:
-                cp = top[0]
+                cp = top[0] - 1
     
     elif not skip:
     
