@@ -1,5 +1,6 @@
 from Stack import Stack
 import re
+from pprint import pprint as pp
 
 SOURCE = "test.txt"
 
@@ -19,54 +20,60 @@ f.close()
 #Upper case
 data = data.upper()
 #Remove all extra whitespace
-data = re.sub("\s\s+", ' ', data).strip()
+data = re.sub("\s+", ' ', data).strip()
 #Explode
 commands = data.split(' ')
 
+pp(commands)
+
 #Validate ops and nesting
-def evalError(*args):
+def evalError(*args): 
     e = ""
     for i in args:
-        e += i
+        e += str(i)
     raise ValueError(e)
 
 n = Stack() #n for Nesting
 pos = 0
 for c in commands:
     pos += 1
+    ###print "S\n" + n.contents() + "E\n"
     if c not in ops:
         try:
             int(c)
         except:
-            evalError("Line ", pos, ": Encountered command which is not an opcode or valid stack item: ", c)
+            evalError("Item ", pos, ": Encountered command which is not an opcode or valid stack item: ", c)
     #Push IF
     elif c == "IF":
         n.push(c)
     #ELSE must follow IF
     elif c == "ELSE":
         if n.height() == 0 or n.pop() != "IF":
-            evalError("Line ", pos, ": Improperly nested ELSE.")
+            evalError("Item ", pos, ": Improperly nested ELSE.")
+        n.push("ELSE")
     #ENDIF must follow IF or ELSE
     elif c == "ENDIF":
         if n.height() == 0:
-            evalError("Line ", pos, ": Improperly nested ENDIF.")
+            evalError("Item ", pos, ": Improperly nested ENDIF.")
         last = n.pop()
-        if last != "IF" or last != "ELSE":
-            evalError("Line ", pos, ": Improperly nested ENDIF.")
+        if last != "IF" and last != "ELSE":
+            evalError("Item ", pos, ": Improperly nested ENDIF.")
     #Push WHILE
     elif c == "WHILE":
         n.push(c)
     #ENDWHILE must follow WHILE
     elif c == "WHILE":
         if n.height() == 0 or n.pop() != "WHILE":
-            evalError("Line ", pos, ": Improperly nested ENDWHILE.")
+            evalError("Item ", pos, ": Improperly nested ENDWHILE.")
     #Push DO
     elif c == "DO":
         n.push(c)
     #DOWHILE must follow DO
     elif c == "DOWHILE":
         if n.height() == 0 or n.pop != "DOWHILE":
-            evalError("Line ", pos, ": Improperly nested DOWHILE.")
+            evalError("Item ", pos, ": Improperly nested DOWHILE.")
+if n.height() != 0:
+    evalError("End reached with unbalanced nesting for:\n", n.contents())
 
     
 #Evaluate
