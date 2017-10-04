@@ -85,6 +85,7 @@ print "Eval done"
     
 #Evaluate
 s = Stack() #data stack
+alt = Stack() #alternate stack
 n = Stack() #n for Nesting
 cp = 0 #Command pointer
 skip = False #nop override for IF/ELSE control
@@ -188,11 +189,11 @@ while cp < len(commands):
         elif c == "ROLL":
         
         elif c == "TOALT":
-        
+            alt.push( s.pop() )
         elif c == "FROMALT":
-        
+            s.push( alt.pop() )
         elif c == "ALTDEPTH":
-        
+            s.push( alt.height() )
         
         
         #Section
