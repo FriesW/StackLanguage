@@ -1,4 +1,7 @@
 from Stack import Stack
+import re
+
+SOURCE = "test.txt"
 
 ops = [
 "NOP", "IF", "NOTIF", "ELSE", "ENDIF", "WHILE", "ENDWHILE", "DO", "DOWHILE",
@@ -10,9 +13,15 @@ ops = [
 "NOT", "MOD", "DIV", "MUL", "EXP", "SUB", "ADD", "ABS", "NEGATE"]
 
 #Read in file
-
+f = open(SOURCE, 'r')
+data = f.read()
+f.close()
+#Upper case
+data = data.upper()
 #Remove all extra whitespace
-
+data = re.sub("\s\s+", ' ', data).strip()
+#Explode
+commands = data.split(' ')
 
 #Validate ops and nesting
 def evalError(*args):
@@ -134,7 +143,7 @@ while cp < len(commands):
     #Section
     elif c == "DEBUG":
         print "== STACK BOTTOM ==\n" + s.contents() + "== STACK TOP ==\n"
-    elif c == "RETURN":
+'''    elif c == "RETURN":
     
     
     #Section
@@ -206,7 +215,7 @@ while cp < len(commands):
     
     elif c == "ABS":
     
-    elif c == "NEGATE":
+    elif c == "NEGATE":'''
     
     else:
         s.push( int(c) )
