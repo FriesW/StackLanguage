@@ -143,7 +143,8 @@ while cp < len(commands):
     #Section
     elif c == "DEBUG":
         print "== STACK BOTTOM ==\n" + s.contents() + "== STACK TOP ==\n"
-'''    elif c == "RETURN":
+        comment_bullshit = '''
+    elif c == "RETURN":
     
     
     #Section
@@ -215,7 +216,8 @@ while cp < len(commands):
     
     elif c == "ABS":
     
-    elif c == "NEGATE":'''
+    elif c == "NEGATE":
+    '''
     
     else:
         s.push( int(c) )
