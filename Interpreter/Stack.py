@@ -3,15 +3,18 @@ class Stack:
         self.s = []
     
     def rotate(self, n):
-        self.s = self.s[n:] + self.s[:n]
+        if self.height() != 0:
+            self.s = self.s[n:] + self.s[:n]
     
     def push(self, item):
         self.s.append(item)
     
     def pop(self):
+        self.__height_check()
         return self.s.pop()
     
     def peek(self):
+        self.__height_check()
         return self.s[-1]
     
     def height(self):
@@ -22,3 +25,7 @@ class Stack:
         for i in self.s:
             out += str(i) + "\n"
         return out
+    
+    def __height_check(self):
+        if self.height() == 0:
+            raise IndexError("Stack is empty.")
