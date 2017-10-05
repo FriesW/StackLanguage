@@ -17,6 +17,13 @@ ops = [
 f = open(SOURCE, 'r')
 data = f.read()
 f.close()
+#Remove comments
+data = re.sub("//(.*?)(\r\n|\r|\n)", '\n', data) #Single line
+data = re.sub("/\*((?s).*?)\*/", '\n', data) #Multi-line
+if data.find("/*") > 0:
+    raise ValueError("Unmatched block comment opening.")
+if data.find("*/") > 0:
+    raise ValueError("Unmatched block comment closing.")
 #Upper case
 data = data.upper()
 #Remove all extra whitespace
@@ -24,7 +31,7 @@ data = re.sub("\s+", ' ', data).strip()
 #Explode
 commands = data.split(' ')
 
-pp(commands)
+#pp(commands)
 
 #Validate ops and nesting
 def evalError(*args): 
