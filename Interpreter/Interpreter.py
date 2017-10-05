@@ -13,7 +13,7 @@ DEFAULT_SOURCE = "instructions.txt"
 OPS = [
 "NOP", "IF", "NOTIF", "ELSE", "ENDIF", "WHILE", "ENDWHILE", "DO", "DOWHILE",
 "DEBUG", "DEBUGALT", "ECHO", "RETURN",
-"DEPTH", "DROP", "ROT", "REVROT", "SWAP", "DUP", "PICK", "ROLL", "TOALT", "FROMALT", "ALTDEPTH",
+"DEPTH", "DROP", "ROT", "REVROT", "SWAP", "DUP", "PICK", "ROLL", "TOALT", "FROMALT", "DEPTHALT",
 "INVERT", "AND", "OR", "XOR", "RSHIFT", "LSHIFT",
 "MAX", "MIN", "GREATERTHANOREQUAL", "GREATERTHAN", "LESSTHANOREQUAL", "LESSTHAN", "EQUAL", "NOTEQUAL",
 "BOOLOR", "BOOLAND", "ONOTEQUAL",
@@ -294,7 +294,7 @@ def evaluate(primary_stack, alternate_stack, commands):
                 alt.push( s.pop() )
             elif c == "FROMALT":
                 s.push( alt.pop() )
-            elif c == "ALTDEPTH":
+            elif c == "DEPTHALT":
                 s.push( alt.height() )
             
             
