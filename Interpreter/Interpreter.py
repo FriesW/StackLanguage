@@ -16,7 +16,7 @@ OPS = [
 "DEPTH", "DROP", "ROT", "REVROT", "SWAP", "DUP", "PICK", "ROLL", "TOALT", "FROMALT", "DEPTHALT",
 "INVERT", "AND", "OR", "XOR", "RSHIFT", "LSHIFT",
 "MAX", "MIN", "GREATERTHANOREQUAL", "GREATERTHAN", "LESSTHANOREQUAL", "LESSTHAN", "EQUAL", "NOTEQUAL",
-"BOOLOR", "BOOLAND", "ONOTEQUAL",
+"BOOLOR", "BOOLAND", "0NOTEQUAL",
 "NOT", "MOD", "DIV", "MUL", "EXP", "SUB", "ADD", "ABS", "NEGATE"]
 
 
@@ -367,7 +367,7 @@ def evaluate(primary_stack, alternate_stack, commands):
                 t0 = bool( s.pop() )
                 t1 = bool( s.pop() )
                 s.push(int( t0 and t1 ))
-            elif c == "ONOTEQUAL":
+            elif c == "0NOTEQUAL":
                 t0 = bool( s.pop() )
                 s.push(int( t0 ))
             elif c == "NOT":

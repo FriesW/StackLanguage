@@ -46,7 +46,7 @@
 | | **Category: Boolean Operations** | | |
 | `BOOLOR` | Boolean or of *top* and *second*, where 0 is false and all else is true | 2 | 1 |
 | `BOOLAND` | Boolean and of *top* and *second*, where 0 is false and all else is true | 2 | 1 |
-| `ONOTEQUAL` | 0 becomes 0, anything else becomes 1 | 1 | 1 |
+| `0NOTEQUAL` | 0 becomes 0, anything else becomes 1 | 1 | 1 |
 | `NOT` | 0 becomes 1, anything else becomes 0 | 1 | 1 |
 | | **Category: Mathematics Operations** | | |
 | `MOD` | *second* % *top* | 2 | 1 |
