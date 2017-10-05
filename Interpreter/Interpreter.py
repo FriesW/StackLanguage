@@ -5,6 +5,7 @@ import re, sys
 MAX_STEPS = 10 ** 6
 DEFAULT_SOURCE = "instructions.txt"
 
+#Not user changeable: with !great changes comes great headaches
 OPS = [
 "NOP", "IF", "NOTIF", "ELSE", "ENDIF", "WHILE", "ENDWHILE", "DO", "DOWHILE",
 "DEBUG", "DEBUGALT", "ECHO", "RETURN",
@@ -408,17 +409,19 @@ if __name__ == "__main__":
         execute_list = []
         build = ""
         for a in args:
-            if a in OPS or __is_number(a):
+            if a.upper() in OPS or __is_number(a):
                 build += a + ' '
             else:
                 if len(build) > 0:
                     execute_list.append( __parse(build) )
                     build = ""
                 execute_list.append( __load_file(a) )
+        if len(build) > 0:
+            execute_list.append( __parse(build) )
         #Execute
         run = True
         while run:
-            run = not evalute(p_stack, a_stack, execute_list.pop(0)) and len(execute_list) > 0
+            run = not evaluate(p_stack, a_stack, execute_list.pop(0)) and len(execute_list) > 0
             
     
     print "TERMINATED\n"
