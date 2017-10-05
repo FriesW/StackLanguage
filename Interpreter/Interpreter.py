@@ -2,6 +2,7 @@ from Stack import Stack
 import re
 from pprint import pprint as pp
 
+MAX_STEPS = 10 ** 6
 SOURCE = "test.txt"
 
 ops = [
@@ -95,12 +96,18 @@ s = Stack() #data stack
 alt = Stack() #alternate stack
 n = Stack() #n for Nesting
 cp = 0 #Command pointer
+step_count = 0 #Count total steps
 skip = False #nop override for IF/ELSE control
 while cp < len(commands):
     c = commands[cp]
     
-    
-    #Section
+    #Check for max runtime
+    if step_count > MAX_STEPS:
+        raise RuntimeWarning("Execution has taken the maximum number of steps (" + format(MAX_STEPS, ',') + "). " + \
+            "Check instructions for infinite loops, or increase the maximum step size.")
+    step_count += 1
+            
+    #Control Section
     if c == "NOP":
         pass
     elif c == "IF": #Entry
@@ -163,7 +170,7 @@ while cp < len(commands):
     elif not skip:
         
         
-        #Section
+        #Output Section
         if c == "DEBUG":
             print "== STACK BOTTOM ==\n" + s.contents() + "== STACK TOP ==\n"
         elif c == "RETURN":
@@ -175,7 +182,7 @@ while cp < len(commands):
                 "== STACK TOP ==\n"
         
         
-        #Section
+        #Stack Section
         elif c == "DEPTH":
             s.push( s.height() )
         elif c == "DROP":
@@ -203,7 +210,7 @@ while cp < len(commands):
             s.push( alt.height() )
         
         
-        #Section
+        #Bitwise Section
         elif c == "INVERT":
             s.push( ~s.pop() )
         elif c == "AND":
@@ -228,7 +235,7 @@ while cp < len(commands):
             s.push( t1 << t0 )
         
         
-        #Section
+        #Comparison Section
         elif c == "MAX":
             t0 = s.pop()
             t1 = s.pop()
@@ -263,7 +270,7 @@ while cp < len(commands):
             s.push(int( t0 != t1 ))
         
         
-        #Section
+        #Boolean Section
         elif c == "BOOLOR":
             t0 = bool( s.pop() )
             t1 = bool( s.pop() )
@@ -280,7 +287,7 @@ while cp < len(commands):
             s.push(int( not t0 ))
         
         
-        #Section
+        #Mathematics Section
         elif c == "MOD":
             t0 = s.pop()
             t1 = s.pop()
