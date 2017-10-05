@@ -1,0 +1,21 @@
+// Collatz conjecture
+//If value already on stack, then use it. Otherwise, use default value of 176.
+depth
+notif //True if empty
+    176
+endif
+
+dup 1 notEqual
+while
+    dup dup //One for math on, one for if statement
+    
+    2 mod
+    notif //True if even, goto else if odd
+       2 div 
+    else
+        3 mul
+        1 add
+    endif
+    dup 1 notEqual //Update state for while loop
+endWhile
+debug //Print out sequence
