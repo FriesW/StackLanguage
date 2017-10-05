@@ -15,18 +15,23 @@
 | `DEBUGALT` | Prints the alternate stack's contents | 0 | 0 |
 | `ECHO` | Pops and prints *top* | 1 | 0 |
 | `RETURN` | Halts execution, prints a validity statement based on value of *top* being nonzero | 0 | 0 |
+
 | | **Category: Stack Operations** | | |
 | `DEPTH` | Pushes the size of the primary stack to the primary stack | 0 | 1 |
 | `DEPTHALT` | Pushes the size of the alternate stack to the primary stack | 0 | 1 |
-| `DROP` | Pops *top* and discards it | 1 | 0 |
-| `ROT` | Rotates the stack, *top* becomes *bottom* for positive values | 0 | 0 |
-| `REVROT` | Rotates the stack, *bottom* becomes *top* for positive values | 0 | 0 |
-| `SWAP` | Swaps *top* and *second* in the stack | 0 | 0 |
-| `DUP` | Duplicates *top* | 0 | 1 |
-| `PICK` | Copies the item *top* away from the top to top, negative *top* indexes from bottom | 0 | 1 |
-| `ROLL` | Moves the item *top* away from the top to top, negative *top* indexes from bottom | 0 | 1 |
 | `TOALT` | Moves *top* to alternate stack | 1 | 1 alt |
 | `FROMALT` | Moves alternate stack top to primary stack | 1 alt | 1 |
+| `DROP` | Pops *top* and discards it | 1 | 0 |
+| `NIP` | Removes *second* and discards it | 1 | 0 |
+| `DUP` | Duplicates *top* | 0 | 1 |
+| `OVER` | Copies *second* to top | 0 | 1 |
+| `PICK` | Copies the item *top* away from the top to top, negative *top* indexes from bottom | 0 | 1 |
+| `ROLL` | Moves the item *top* away from the top to top, negative *top* indexes from bottom | 0 | 1 |
+| `SWAP` | Swaps *top* and *second* in the stack | 0 | 0 |
+| `ROTATE` | Rotates the stack, *top* becomes *bottom* for positive values | 0 | 0 |
+| `REVROTATE` | Rotates the stack, *bottom* becomes *top* for positive values | 0 | 0 |
+
+
 | | **Category: Bitwise Operations** | | |
 | `INVERT` | Bitwise inversion of *top* | 1 | 1 |
 | `AND` | Bitwise and of *top* and *second* | 2 | 1 |
