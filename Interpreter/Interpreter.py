@@ -1,9 +1,13 @@
-from Stack import Stack
 import re, sys
 
 #User changeable
 MAX_STEPS = 10 ** 6
 DEFAULT_SOURCE = "instructions.txt"
+
+
+#Skip to the bottom for __main__ program
+
+
 
 #Not user changeable: with !great changes comes great headaches
 OPS = [
@@ -16,9 +20,16 @@ OPS = [
 "NOT", "MOD", "DIV", "MUL", "EXP", "SUB", "ADD", "ABS", "NEGATE"]
 
 
-#Skip to the bottom for __main__ program
 
-
+# class Stack - The primary "memory" of this computer. Has the following methods:
+#       rotate(int):void - rotates the beginning and ending of the stack
+#       push(int):void - add item to top of stack
+#       pop():int - removes and returns the top of the stack, IndexError on emtpy stack
+#       peek():int - returns the top of the stack without removal, IndexError on empty stack
+#       pick(int):void - copies an item at the position to the top, IndexError on position past stack bounds
+#       roll(int):void - moves an item at the position to the top, IndexError on position past stack bounds
+#       height():int - returns the height of the stack
+#       contents():string - returns a string containing a representation of the stack
 # openFile (string):string - opens file and returns string of contents
 #       Exception on File/IO errors
 # parseCommands (string):array[string]- parses string to produce array of opcodes/commands
@@ -28,6 +39,55 @@ OPS = [
 # evaluate(Stack, Stack, commands):bool - evaluates commands on given stacks (primary, alternate). Returns True if halted, otherwise false.
 #       Exception on divide by zero, index error, empty stack, past bounds of stack, maximum execution steps, probably some other stuff I missed
 
+
+
+
+class Stack:
+    def __init__(self):
+        self.s = []
+    
+    def rotate(self, n):
+        if self.height() != 0:
+            n = n % self.height()
+            self.s = self.s[n:] + self.s[:n]
+    
+    def push(self, item):
+        self.s.append(item)
+    
+    def pop(self):
+        self.__height_check()
+        return self.s.pop()
+    
+    def peek(self):
+        self.__height_check()
+        return self.s[-1]
+    
+    def pick(self, n):
+        if n >= self.height() or n < -self.height():
+            raise IndexError("Pick past start of stack.")
+        if n < -self.height():
+            raise IndexError("Pick past end of stack.")
+        self.push( self.s[-n - 1] )
+    
+    def roll(self, n):
+        if n >= self.height():
+            raise IndexError("Roll past start of stack.")
+        if n < -self.height():
+            raise IndexError("Roll past end of stack.")
+        self.push( self.s.pop(-n - 1) ) #Note: array pop, not Stack pop!
+    
+    def height(self):
+        return len(self.s)
+    
+    def contents(self):
+        out = ""
+        for i in self.s:
+            out += str(i) + "\n"
+        return out
+    
+    def __height_check(self):
+        if self.height() == 0:
+            raise IndexError("Stack is empty.")
 
 
 
