@@ -3,7 +3,7 @@
 | | **Category: Flow Control** | | |
 | `NOP` | Do nothing | 0 | 0 |
 | `IF` | Run code until `ELSE` or `ENDIF` if *top* is nonzero | 1 | 0 |
-| `NOTIF` | Run code until `ELSE` or `ENDIF` | if *top* is zero | 1 | 0 |
+| `NOTIF` | Run code until `ELSE` or `ENDIF` if *top* is zero | 1 | 0 |
 | `ELSE` | Run code until `ENDIF` if matching `IF` or `NOTIF` evaluated false | 0 | 0 |
 | `ENDIF` | Closes either a matching `IF`, `NOTIF`, or `ELSE` | 0 | 0 |
 | `WHILE` | Run code until matching `ENDWHILE` if *top* is nonzero | 1 | 0 |
@@ -59,7 +59,7 @@
 | `NEGATE` | Flip the sign of *top* | 1 | 1 |
 
 
-Notes:
+#### Notes:
 
 If stack is not specified, the primary stack is assumed.
 
