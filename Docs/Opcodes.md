@@ -34,8 +34,8 @@
 | `2SWAP` | Swaps the top two pairs, `x1 x2 x3 x4` &rarr; `x3 x4 x1 x2` | 0 | 0 |
 | `TUCK` | *top* is copied and inserted before *second*, `x1 x2` &rarr; `x2 x1 x2` | 0 | 1 |
 | `2OVER` | Copies the pair two items back to top, `x1 x2 x3 x4` &rarr; `x1 x2 x3 x4 x1 x2` | 0 | 2 |
-| `ROTATE` | Rotates the stack, *top* becomes *bottom* for positive values | 0 | 0 |
-| `REVROTATE` | Rotates the stack, *bottom* becomes *top* for positive values | 0 | 0 |
+| `ROTATE` | Rotates the stack by *top*, *top* becomes *bottom* for positive values | 1 | 0 |
+| `REVROTATE` | Rotates the stack by *top*, *bottom* becomes *top* for positive values | 1 | 0 |
 | | **Category: Bitwise Operations** | | |
 | `INVERT` | Bitwise inversion of *top* | 1 | 1 |
 | `AND` | Bitwise and of *top* and *second* | 2 | 1 |
