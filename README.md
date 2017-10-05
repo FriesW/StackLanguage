@@ -17,8 +17,20 @@ python Interpreter.py
 This will execute the default file specified at the top of the Interpreter.py script. It is most likely "instructions.txt".
 
 #### Mode 2
+
+Opening an external file:
 ```
-python Interpreter.py 3 5 ADD 152 verify.txt 19 SUBTRACT 1 debug
+python Interpreter.py ../Examples/Collatz_Conjecture.txt
+```
+
+Opening an external file with a pre-filled stack:
+```
+python Interpreter.py 1897 ../Examples/Collatz_Conjecture.txt
+```
+
+An insane but valid example (if files exist):
+```
+python Interpreter.py 3 5 OP_ADD 152 verify.txt add SUBTRACT 1 debug
 ```
 Immediate opcodes: arguments 0, 1, 2, 3, 5, 7, 8
 
@@ -32,6 +44,7 @@ File names: arguments 4, 6
 * See the Docs folder for a markdown document of the opcodes.
 * Interpreter.py is portable and has no dependencies outside of Python.
 * Instructions are not case sensitive.
+* Instructions can begin with `OP_` if desired.
 * Instruction sources support c-like comments: ```// A line comment``` and ```/* A block comment */```
 * Only signed integers and signed integer arithmetic.
 
