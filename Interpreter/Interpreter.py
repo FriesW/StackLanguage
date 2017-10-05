@@ -13,7 +13,7 @@ DEFAULT_SOURCE = "instructions.txt"
 OPS = [
 "NOP", "IF", "NOTIF", "ELSE", "ENDIF", "WHILE", "ENDWHILE", "DO", "DOWHILE",
 "DEBUG", "DEBUGALT", "ECHO", "RETURN",
-"DEPTH", "DEPTHALT", "TOALT", "FROMALT", "DROP", "NIP", "DUP", "OVER", "PICK", "ROLL", "ROT", "SWAP", "TUCK", "2DUP", "3DUP", "2OVER", "2ROT", "2SWAP", "ROTATE", "REVROTATE"
+"DEPTH", "DEPTHALT", "TOALT", "FROMALT", "DROP", "NIP", "DUP", "OVER", "PICK", "ROLL", "ROT", "SWAP", "TUCK", "2DUP", "3DUP", "2OVER", "2ROT", "2SWAP", "ROTATE", "REVROTATE",
 "INVERT", "AND", "OR", "XOR", "RSHIFT", "LSHIFT",
 "MAX", "MIN", "GREATERTHANOREQUAL", "GREATERTHAN", "LESSTHANOREQUAL", "LESSTHAN", "EQUAL", "NOTEQUAL",
 "BOOLOR", "BOOLAND", "0NOTEQUAL",
@@ -297,24 +297,6 @@ def evaluate(primary_stack, alternate_stack, commands):
                 s.pick( s.pop() )
             elif c == "ROLL":
                 s.roll( s.pop() )
-            elif c == "ROT":
-                t0 = s.pop()
-                t1 = s.pop()
-                t2 = s.pop()
-                s.push( t1 )
-                s.push( t0 )
-                s.push( t2 )
-            elif c == "SWAP":
-                t0 = s.pop()
-                t1 = s.pop()
-                s.push( t0 )
-                s.push( t1 )
-            elif c == "TUCK":
-                t0 = s.pop()
-                t1 = s.pop()
-                s.push( t0 )
-                s.push( t1 )
-                s.push( t0 )
             elif c == "2DUP":
                 t0 = s.pop()
                 t1 = s.pop()
@@ -332,17 +314,18 @@ def evaluate(primary_stack, alternate_stack, commands):
                 s.push( t2 )
                 s.push( t1 )
                 s.push( t0 )
-            elif c == "2OVER":
+            elif c == "ROT":
                 t0 = s.pop()
                 t1 = s.pop()
                 t2 = s.pop()
-                t3 = s.pop()
-                s.push( t3 )
-                s.push( t2 )
                 s.push( t1 )
                 s.push( t0 )
-                s.push( t3 )
                 s.push( t2 )
+            elif c == "SWAP":
+                t0 = s.pop()
+                t1 = s.pop()
+                s.push( t0 )
+                s.push( t1 )
             elif c == "2ROT":
                 t0 = s.pop()
                 t1 = s.pop()
@@ -361,6 +344,23 @@ def evaluate(primary_stack, alternate_stack, commands):
                 t1 = s.pop()
                 t2 = s.pop()
                 t3 = s.pop()
+                s.push( t1 )
+                s.push( t0 )
+                s.push( t3 )
+                s.push( t2 )
+            elif c == "TUCK":
+                t0 = s.pop()
+                t1 = s.pop()
+                s.push( t0 )
+                s.push( t1 )
+                s.push( t0 )
+            elif c == "2OVER":
+                t0 = s.pop()
+                t1 = s.pop()
+                t2 = s.pop()
+                t3 = s.pop()
+                s.push( t3 )
+                s.push( t2 )
                 s.push( t1 )
                 s.push( t0 )
                 s.push( t3 )
