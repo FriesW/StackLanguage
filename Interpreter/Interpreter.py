@@ -11,7 +11,7 @@ DEFAULT_SOURCE = "instructions.txt"
 
 #Not user changeable: with !great changes comes great headaches
 OPS = [
-"NOP", "IF", "NOTIF", "ELSE", "ENDIF", "WHILE", "ENDWHILE", "DO", "DOWHILE",
+"NOP", "IF", "NOTIF", "ELSE", "ENDIF", "WHILE", "NOTWHILE", "ENDWHILE", "DO", "DOWHILE", "DONOTWHILE",
 "DEBUG", "DEBUGALT", "ECHO", "RETURN",
 "DEPTH", "DEPTHALT", "TOALT", "FROMALT", "DROP", "NIP", "DUP", "OVER", "PICK", "ROLL", "2DUP", "3DUP", "ROT", "SWAP", "2ROT", "2SWAP", "TUCK", "2OVER", "ROTATE", "REVROTATE",
 "INVERT", "AND", "OR", "XOR", "RSHIFT", "LSHIFT",
@@ -169,9 +169,15 @@ def validateCommands(commands):
         #Push WHILE
         elif c == "WHILE":
             n.push(c)
-        #ENDWHILE must follow WHILE
+        #Push NOTWHILE
+        elif c == "NOTWHILE":
+            n.push(c)
+        #ENDWHILE must follow WHILE or NOTWHILE
         elif c == "ENDWHILE":
-            if n.height() == 0 or n.pop() != "WHILE":
+            if n.height() == 0:
+                evalError("Item ", pos, ": Improperly nested ENDWHILE.")
+            last = n.pop()
+            if last != "WHILE" and last != "NOTWHILE":
                 evalError("Item ", pos, ": Improperly nested ENDWHILE.")
         #Push DO
         elif c == "DO":
@@ -180,6 +186,10 @@ def validateCommands(commands):
         elif c == "DOWHILE":
             if n.height() == 0 or n.pop() != "DO":
                 evalError("Item ", pos, ": Improperly nested DOWHILE.")
+        #DONOTWHILE must follow DO
+        elif c== "DONOTWHILE":
+            if n.height() == 0 or n.pop != "DO":
+                evalError("Item ", pos, ": Improperly nested DONOTWHLE.")
     if n.height() != 0:
         evalError("End reached with unbalanced nesting for:\n", n.contents())
 
@@ -242,6 +252,13 @@ def evaluate(primary_stack, alternate_stack, commands):
                 run = 0 != s.pop()
                 skip = not run
                 n.push( (cp, run) )
+        elif c == "NOTWHILE": #Entry
+            if skip:
+                n.push( (cp, None) )
+            else:
+                run = 0 == s.pop()
+                skip = not run
+                n.push( (cp, run) )
         elif c == "ENDWHILE": #Exit
             top = n.pop()
             if top[1] == None: #Nested during nop
@@ -259,6 +276,13 @@ def evaluate(primary_stack, alternate_stack, commands):
                 pass
             else:
                 if s.pop() != 0:
+                    cp = top[0] - 1
+        elif c == "DONOTWHILE": #Exit
+            top = n.pop()
+            if skip: #Nested during nop
+                pass
+            else:
+                if s.pop() == 0:
                     cp = top[0] - 1
         
         elif not skip:
