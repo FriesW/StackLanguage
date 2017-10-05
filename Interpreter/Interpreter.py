@@ -7,7 +7,7 @@ SOURCE = "test.txt"
 
 ops = [
 "NOP", "IF", "NOTIF", "ELSE", "ENDIF", "WHILE", "ENDWHILE", "DO", "DOWHILE",
-"DEBUG", "RETURN",
+"DEBUG", "DEBUGALT", "ECHO", "RETURN",
 "DEPTH", "DROP", "ROT", "REVROT", "SWAP", "DUP", "PICK", "ROLL", "TOALT", "FROMALT", "ALTDEPTH",
 "INVERT", "AND", "OR", "XOR", "RSHIFT", "LSHIFT",
 "MAX", "MIN", "GREATERTHANOREQUAL", "GREATERTHAN", "LESSTHANOREQUAL", "LESSTHAN", "EQUAL", "NOTEQUAL",
@@ -173,6 +173,10 @@ while cp < len(commands):
         #Output Section
         if c == "DEBUG":
             print "== STACK BOTTOM ==\n" + s.contents() + "== STACK TOP ==\n"
+        elif c == "DEBUGALT":
+            print "== STACK BOTTOM ==\n" + alt.contents() + "== STACK TOP ==\n"
+        elif c == "ECHO":
+            print "Echo: " + str( s.pop() )
         elif c == "RETURN":
             cp = len(commands) #Terminate
             print "Execution halted " + \
