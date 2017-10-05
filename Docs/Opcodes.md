@@ -7,9 +7,11 @@
 | `ELSE` | Run code until `ENDIF` if matching `IF` or `NOTIF` evaluated false | 0 | 0 |
 | `ENDIF` | Closes either a matching `IF`, `NOTIF`, or `ELSE` | 0 | 0 |
 | `WHILE` | Run code until matching `ENDWHILE` if *top* is nonzero | 1 | 0 |
+| `NOTWHILE` | Run code until matching `ENDWHILE` if *top* is zero | 1 | 0 |
 | `ENDWHILE` | Exit location for matching `WHILE` | 0 | 0 |
 | `DO` | Entry location for matching `DOWHILE` | 0 | 0 |
 | `DOWHILE` | Jumps to matching `DO` if *top* is nonzero | 1 | 0 |
+| `DONOTWHILE` | Jumps to matching `DO` if *top* is zero | 1 | 0 |
 | | **Category: Output and Debug** | | |
 | `DEBUG` | Prints the primary stack's contents | 0 | 0 |
 | `DEBUGALT` | Prints the alternate stack's contents | 0 | 0 |
