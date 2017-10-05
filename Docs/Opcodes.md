@@ -15,7 +15,6 @@
 | `DEBUGALT` | Prints the alternate stack's contents | 0 | 0 |
 | `ECHO` | Pops and prints *top* | 1 | 0 |
 | `RETURN` | Halts execution, prints a validity statement based on value of *top* being nonzero | 0 | 0 |
-
 | | **Category: Stack Operations** | | |
 | `DEPTH` | Pushes the size of the primary stack to the primary stack | 0 | 1 |
 | `DEPTHALT` | Pushes the size of the alternate stack to the primary stack | 0 | 1 |
@@ -27,11 +26,16 @@
 | `OVER` | Copies *second* to top | 0 | 1 |
 | `PICK` | Copies the item *top* away from the top to top, negative *top* indexes from bottom | 0 | 1 |
 | `ROLL` | Moves the item *top* away from the top to top, negative *top* indexes from bottom | 0 | 1 |
+| `2DUP` | Duplicates both *top* and *second*, `x1 x2` &rarr; `x1 x2 x1 x2` | 0 | 2 |
+| `3DUP` | Duplicates the top 3 stack items, `x1 x2 x3` &rarr; `x1 x2 x3 x1 x2 x3` | 0 | 3 |
+| `ROT` | Top 3 stack items are rotated left, `x1 x2 x3` &rarr; `x2 x3 x1` | 0 | 0 |
 | `SWAP` | Swaps *top* and *second* in the stack | 0 | 0 |
+| `2ROT` | Fifth and sixth items back are moved to top, `x1 x2 x3 x4 x5 x6` &rarr; `x3 x4 x5 x6 x1 x2` | 0 | 0 |
+| `2SWAP` | Swaps the top two pairs, `x1 x2 x3 x4` &rarr; `x3 x4 x1 x2` | 0 | 0 |
+| `TUCK` | *top* is copied and inserted before *second*, `x1 x2` &rarr; `x2 x1 x2` | 0 | 1 |
+| `2OVER` | Copies the pair two items back to top, `x1 x2 x3 x4` &rarr; `x1 x2 x3 x4 x1 x2` | 0 | 2 |
 | `ROTATE` | Rotates the stack, *top* becomes *bottom* for positive values | 0 | 0 |
 | `REVROTATE` | Rotates the stack, *bottom* becomes *top* for positive values | 0 | 0 |
-
-
 | | **Category: Bitwise Operations** | | |
 | `INVERT` | Bitwise inversion of *top* | 1 | 1 |
 | `AND` | Bitwise and of *top* and *second* | 2 | 1 |
