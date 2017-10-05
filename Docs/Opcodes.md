@@ -70,8 +70,8 @@
 
 #### Notes:
 
-If stack is not specified, the primary stack is assumed.
-
-*top* is the top most item on the primary stack.
-
-*second* is the second to top most item on the primary stack.
+ * If stack is not specified, the primary stack is assumed.
+ * *top* is the top most item on the primary stack.
+ * *second* is the second to top most item on the primary stack.
+ * Opcodes are not case sensitive.
+ * `OP_` before each opcode is optional.
