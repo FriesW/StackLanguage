@@ -290,89 +290,41 @@ def evaluate(primary_stack, alternate_stack, commands):
             elif c == "DROP":
                 s.pop()
             elif c == "NIP":
-                t0 = s.pop()
-                t1 = s.pop()
+                t0, t1 = s.pop(2)
                 s.push( t0 )
             elif c == "DUP":
                 s.push( s.peek() )
             elif c == "OVER":
-                t0 = s.pop()
-                t1 = s.pop()
-                s.push( t1 )
-                s.push( t0 )
-                s.push( t1 )
+                t0, t1 = s.pop(2)
+                s.push( t1, t0, t1 )
             elif c == "PICK":
                 s.pick( s.pop() )
             elif c == "ROLL":
                 s.roll( s.pop() )
             elif c == "2DUP":
-                t0 = s.pop()
-                t1 = s.pop()
-                s.push( t1 )
-                s.push( t0 )
-                s.push( t1 )
-                s.push( t0 )
+                t0, t1 = s.pop(2)
+                s.push( t1, t0, t1, t0 )
             elif c == "3DUP":
-                t0 = s.pop()
-                t1 = s.pop()
-                t2 = s.pop()
-                s.push( t2 )
-                s.push( t1 )
-                s.push( t0 )
-                s.push( t2 )
-                s.push( t1 )
-                s.push( t0 )
+                t0, t1, t2 = s.pop(3)
+                s.push( t2, t1, t0, t2, t1, t0 )
             elif c == "ROT":
-                t0 = s.pop()
-                t1 = s.pop()
-                t2 = s.pop()
-                s.push( t1 )
-                s.push( t0 )
-                s.push( t2 )
+                t0, t1, t2 = s.pop(3)
+                s.push( t1, t0, t2 )
             elif c == "SWAP":
-                t0 = s.pop()
-                t1 = s.pop()
-                s.push( t0 )
-                s.push( t1 )
+                t0, t1 = s.pop(2)
+                s.push( t0, t1 )
             elif c == "2ROT":
-                t0 = s.pop()
-                t1 = s.pop()
-                t2 = s.pop()
-                t3 = s.pop()
-                t4 = s.pop()
-                t5 = s.pop()
-                s.push( t3 )
-                s.push( t2 )
-                s.push( t1 )
-                s.push( t0 )
-                s.push( t5 )
-                s.push( t4 )
+                t0, t1, t2, t3, t4, t5 = s.pop(6)
+                s.push( t3, t2, t1, t0, t5, t4 )
             elif c == "2SWAP":
-                t0 = s.pop()
-                t1 = s.pop()
-                t2 = s.pop()
-                t3 = s.pop()
-                s.push( t1 )
-                s.push( t0 )
-                s.push( t3 )
-                s.push( t2 )
+                t0, t1, t2, t3 = s.pop(4)
+                s.push( t1, t0, t3, t2 )
             elif c == "TUCK":
-                t0 = s.pop()
-                t1 = s.pop()
-                s.push( t0 )
-                s.push( t1 )
-                s.push( t0 )
+                t0, t1 = s.pop(2)
+                s.push( t0, t1, t0 )
             elif c == "2OVER":
-                t0 = s.pop()
-                t1 = s.pop()
-                t2 = s.pop()
-                t3 = s.pop()
-                s.push( t3 )
-                s.push( t2 )
-                s.push( t1 )
-                s.push( t0 )
-                s.push( t3 )
-                s.push( t2 )
+                t0, t1, t2, t3 = s.pop(4)
+                s.push( t3, t2, t1, t0, t3, t2 )
             elif c == "ROTATE":
                 s.rotate( -s.pop() )
             elif c == "REVROTATE":
@@ -383,59 +335,46 @@ def evaluate(primary_stack, alternate_stack, commands):
             elif c == "INVERT":
                 s.push( ~s.pop() )
             elif c == "AND":
-                t0 = s.pop()
-                t1 = s.pop()
+                t0, t1 = s.pop(2)
                 s.push( t0 & t1 )
             elif c == "OR":
-                t0 = s.pop()
-                t1 = s.pop()
+                t0, t1 = s.pop(2)
                 s.push( t0 | t1 )
             elif c == "XOR":
-                t0 = s.pop()
-                t1 = s.pop()
+                t0, t1 = s.pop(2)
                 s.push( t0 ^ t1 )
             elif c == "RSHIFT":
-                t0 = s.pop()
-                t1 = s.pop()
+                t0, t1 = s.pop(2)
                 s.push( t1 >> t0 )
             elif c == "LSHIFT":
-                t0 = s.pop()
-                t1 = s.pop()
+                t0, t1 = s.pop(2)
                 s.push( t1 << t0 )
             
             
             #Comparison Section
             elif c == "MAX":
-                t0 = s.pop()
-                t1 = s.pop()
+                t0, t1 = s.pop(2)
                 s.push( max(t0, t1) )
             elif c == "MIN":
-                t0 = s.pop()
-                t1 = s.pop()
+                t0, t1 = s.pop(2)
                 s.push( max(t0, t1) )
             elif c == "GREATERTHANOREQUAL":
-                t0 = s.pop()
-                t1 = s.pop()
+                t0, t1 = s.pop(2)
                 s.push(int( t0 >= t1 ))
             elif c == "GREATERTHAN":
-                t0 = s.pop()
-                t1 = s.pop()
+                t0, t1 = s.pop(2)
                 s.push(int( t0 > t1 ))
             elif c == "LESSTHANOREQUAL":
-                t0 = s.pop()
-                t1 = s.pop()
+                t0, t1 = s.pop(2)
                 s.push(int( t0 <= t1 ))
             elif c == "LESSTHAN":
-                t0 = s.pop()
-                t1 = s.pop()
+                t0, t1 = s.pop(2)
                 s.push(int( t0 < t1 ))
             elif c == "EQUAL":
-                t0 = s.pop()
-                t1 = s.pop()
+                t0, t1 = s.pop(2)
                 s.push(int( t0 == t1 ))
             elif c == "NOTEQUAL":
-                t0 = s.pop()
-                t1 = s.pop()
+                t0, t1 = s.pop(2)
                 s.push(int( t0 != t1 ))
             
             
@@ -458,28 +397,22 @@ def evaluate(primary_stack, alternate_stack, commands):
             
             #Mathematics Section
             elif c == "MOD":
-                t0 = s.pop()
-                t1 = s.pop()
+                t0, t1 = s.pop(2)
                 s.push( t1 % t0 )
             elif c == "DIV":
-                t0 = s.pop()
-                t1 = s.pop()
+                t0, t1 = s.pop(2)
                 s.push( t1 / t0 )
             elif c == "MUL":
-                t0 = s.pop()
-                t1 = s.pop()
+                t0, t1 = s.pop(2)
                 s.push( t1 * t0 )
             elif c == "EXP":
-                t0 = s.pop()
-                t1 = s.pop()
+                t0, t1 = s.pop(2)
                 s.push( t1 ** t0 )
             elif c == "SUB":
-                t0 = s.pop()
-                t1 = s.pop()
+                t0, t1 = s.pop(2)
                 s.push( t1 - t0 )
             elif c == "ADD":
-                t0 = s.pop()
-                t1 = s.pop()
+                t0, t1 = s.pop(2)
                 s.push( t1 + t0 )
             elif c == "ABS":
                 s.push( abs(s.pop()) )
