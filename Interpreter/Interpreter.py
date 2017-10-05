@@ -23,8 +23,8 @@ OPS = [
 
 # class Stack - The primary "memory" of this computer. Has the following methods:
 #       rotate(int):void - rotates the beginning and ending of the stack
-#       push(int):void - add item to top of stack
-#       pop():int - removes and returns the top of the stack, IndexError on emtpy stack
+#       push(*int):void - add item(s) to top of stack, in order from left to right
+#       pop(int=1):int:[int] - removes and returns the top(s) of the stack, left to right from top to bottom, IndexError on emtpy stack
 #       peek():int - returns the top of the stack without removal, IndexError on empty stack
 #       pick(int):void - copies an item at the position to the top, IndexError on position past stack bounds
 #       roll(int):void - moves an item at the position to the top, IndexError on position past stack bounds
@@ -266,7 +266,7 @@ def evaluate(primary_stack, alternate_stack, commands):
             if c == "DEBUG":
                 print "== STACK BOTTOM ==\n" + s.contents() + "== STACK TOP ==\n"
             elif c == "DEBUGALT":
-                print "== STACK BOTTOM ==\n" + alt.contents() + "== STACK TOP ==\n"
+                print "== ALT STACK BOTTOM ==\n" + alt.contents() + "== ALT STACK TOP ==\n"
             elif c == "ECHO":
                 print "Echo: " + str( s.pop() )
             elif c == "RETURN":
