@@ -438,7 +438,8 @@ def __is_number(string):
 def __parse(string):
     print "validating...",
     sys.stdout.flush()
-    out = validateCommands(parseCommands(string))
+    out = parseCommands(string)
+    validateCommands(out)
     print "success."
     return out
     
