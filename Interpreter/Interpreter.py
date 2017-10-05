@@ -120,7 +120,6 @@ def parseCommands(raw_file):
 
 
 def validateCommands(commands):
-    
     def evalError(*args): 
         e = ""
         for i in args:
@@ -424,7 +423,7 @@ def evaluate(primary_stack, alternate_stack, commands):
 # __is_number(string):bool - tells if a string can be typecast to an int or not
 #       No exceptions, unless the world ends
 # __parse(string):array[string] - Wrapper for parseCommands(...) with fancy printing
-#       Exception on anyting parseCommands(...) would throw
+#       Exception on anyting parseCommands(...) or validateCommands(...) would throw
 # __load_file(string):string - Wrapper for openFile(...) and __parse(...) with fancy printing
 #       Exception on anything openFile(...) or __parse(...) would throw
 
@@ -437,9 +436,9 @@ def __is_number(string):
         return False
 
 def __parse(string):
-    print "parsing...",
+    print "validating...",
     sys.stdout.flush()
-    out = parseCommands(string)
+    out = validateCommands(parseCommands(string))
     print "success."
     return out
     
