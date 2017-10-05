@@ -120,7 +120,9 @@ def parseCommands(raw_file):
     #Upper case
     data = data.upper()
     #Remove all extra whitespace
-    data = re.sub("\s+", ' ', data).strip()
+    data = re.sub("\s+", ' ', data).strip() #Strip needed to remove space at beginning * ending
+    #Remove OP_
+    data = data.replace("OP_",'')
     #Explode
     data = data.split(' ')
     return data
@@ -485,7 +487,7 @@ if __name__ == "__main__":
         execute_list = []
         build = ""
         for a in args:
-            if a.upper() in OPS or __is_number(a):
+            if a.upper().replace("OP_", '') in OPS or __is_number(a):
                 build += a + ' '
             else:
                 if len(build) > 0:
