@@ -103,7 +103,7 @@ def openFile(file_name):
 def parseCommands(raw_file):
     data = raw_file
     #Remove comments
-    data = re.sub("//(.*?)(\r\n|\r|\n)", '\n', data) #Single line
+    data = re.sub("//(.*?)(\r\n|\r|\n)", '\n', data + '\n') #Single line, add newline for edgecase of comment at end
     data = re.sub("/\*((?s).*?)\*/", '\n', data) #Multi-line
     if data.find("/*") > 0:
         raise ValueError("Unmatched block comment opening.")
@@ -461,9 +461,10 @@ if __name__ == "__main__":
     #No arguments provided, load default
     if len(args) == 0:
         print "No arguments provided. Loading default file."
+        commands = __load_file(DEFAULT_SOURCE)
         #Execute
         print "Beginning execution:\n"
-        evaluate(p_stack, a_stack, __load_file(DEFAULT_SOURCE) )
+        evaluate(p_stack, a_stack, commands)
     
     #Otherwise, load in command line arguments
     else:
