@@ -377,14 +377,14 @@ def __is_number(string):
         return False
 
 def __parse(string):
-    print "parsing... ",
+    print "parsing...",
     sys.stdout.flush()
     out = parseCommands(string)
     print "success."
     return out
     
 def __load_file(string):
-    print "Opening file '" + string + "'... ",
+    print "Opening file '" + string + "'...",
     sys.stdout.flush()
     out = __parse( openFile(string) )
     return out
@@ -402,6 +402,7 @@ if __name__ == "__main__":
     if len(args) == 0:
         print "No arguments provided. Loading default file."
         #Execute
+        print "Beginning execution:\n"
         evaluate(p_stack, a_stack, __load_file(DEFAULT_SOURCE) )
     
     #Otherwise, load in command line arguments
@@ -413,12 +414,15 @@ if __name__ == "__main__":
                 build += a + ' '
             else:
                 if len(build) > 0:
+                    print "Command line",
                     execute_list.append( __parse(build) )
                     build = ""
                 execute_list.append( __load_file(a) )
         if len(build) > 0:
+            print "Command line",
             execute_list.append( __parse(build) )
         #Execute
+        print "Beginning execution:\n"
         run = True
         while run:
             run = not evaluate(p_stack, a_stack, execute_list.pop(0)) and len(execute_list) > 0
