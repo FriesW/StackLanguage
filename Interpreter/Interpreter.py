@@ -13,7 +13,7 @@ DEFAULT_SOURCE = "instructions.txt"
 OPS = [
 "NOP", "IF", "NOTIF", "ELSE", "ENDIF", "WHILE", "ENDWHILE", "DO", "DOWHILE",
 "DEBUG", "DEBUGALT", "ECHO", "RETURN",
-"DEPTH", "DROP", "ROT", "REVROT", "SWAP", "DUP", "PICK", "ROLL", "TOALT", "FROMALT", "DEPTHALT",
+"DEPTH", "DEPTHALT", "TOALT", "FROMALT", "DROP", "NIP", "DUP", "OVER", "PICK", "ROLL", "ROT", "SWAP", "TUCK", "2DUP", "3DUP", "2OVER", "2ROT", "2SWAP", "ROTATE", "REVROTATE"
 "INVERT", "AND", "OR", "XOR", "RSHIFT", "LSHIFT",
 "MAX", "MIN", "GREATERTHANOREQUAL", "GREATERTHAN", "LESSTHANOREQUAL", "LESSTHAN", "EQUAL", "NOTEQUAL",
 "BOOLOR", "BOOLAND", "0NOTEQUAL",
@@ -275,27 +275,100 @@ def evaluate(primary_stack, alternate_stack, commands):
                 s.push( s.height() )
             elif c == "DEPTHALT":
                 s.push( alt.height() )
+            elif c == "TOALT":
+                alt.push( s.pop() )
+            elif c == "FROMALT":
+                s.push( alt.pop() )
             elif c == "DROP":
                 s.pop()
+            elif c == "NIP":
+                t0 = s.pop()
+                t1 = s.pop()
+                s.push( t0 )
+            elif c == "DUP":
+                s.push( s.peek() )
+            elif c == "OVER":
+                t0 = s.pop()
+                t1 = s.pop()
+                s.push( t1 )
+                s.push( t0 )
+                s.push( t1 )
+            elif c == "PICK":
+                s.pick( s.pop() )
+            elif c == "ROLL":
+                s.roll( s.pop() )
             elif c == "ROT":
-                s.rotate( -s.pop() )
-            elif c == "REVROT":
-                s.rotate( s.pop() )
+                t0 = s.pop()
+                t1 = s.pop()
+                t2 = s.pop()
+                s.push( t1 )
+                s.push( t0 )
+                s.push( t2 )
             elif c == "SWAP":
                 t0 = s.pop()
                 t1 = s.pop()
                 s.push( t0 )
                 s.push( t1 )
-            elif c == "DUP":
-                s.push( s.peek() )
-            elif c == "PICK":
-                s.pick( s.pop() )
-            elif c == "ROLL":
-                s.roll( s.pop() )
-            elif c == "TOALT":
-                alt.push( s.pop() )
-            elif c == "FROMALT":
-                s.push( alt.pop() )
+            elif c == "TUCK":
+                t0 = s.pop()
+                t1 = s.pop()
+                s.push( t0 )
+                s.push( t1 )
+                s.push( t0 )
+            elif c == "2DUP":
+                t0 = s.pop()
+                t1 = s.pop()
+                s.push( t1 )
+                s.push( t0 )
+                s.push( t1 )
+                s.push( t0 )
+            elif c == "3DUP":
+                t0 = s.pop()
+                t1 = s.pop()
+                t2 = s.pop()
+                s.push( t2 )
+                s.push( t1 )
+                s.push( t0 )
+                s.push( t2 )
+                s.push( t1 )
+                s.push( t0 )
+            elif c == "2OVER":
+                t0 = s.pop()
+                t1 = s.pop()
+                t2 = s.pop()
+                t3 = s.pop()
+                s.push( t3 )
+                s.push( t2 )
+                s.push( t1 )
+                s.push( t0 )
+                s.push( t3 )
+                s.push( t2 )
+            elif c == "2ROT":
+                t0 = s.pop()
+                t1 = s.pop()
+                t2 = s.pop()
+                t3 = s.pop()
+                t4 = s.pop()
+                t5 = s.pop()
+                s.push( t3 )
+                s.push( t2 )
+                s.push( t1 )
+                s.push( t0 )
+                s.push( t5 )
+                s.push( t4 )
+            elif c == "2SWAP":
+                t0 = s.pop()
+                t1 = s.pop()
+                t2 = s.pop()
+                t3 = s.pop()
+                s.push( t1 )
+                s.push( t0 )
+                s.push( t3 )
+                s.push( t2 )
+            elif c == "ROTATE":
+                s.rotate( -s.pop() )
+            elif c == "REVROTATE":
+                s.rotate( s.pop() )
             
             
             #Bitwise Section
