@@ -1,0 +1,101 @@
+depthalt while fromalt depthalt endwhile
+depth while drop depth endwhile
+
+10 20 toalt
+debug debugalt
+fromalt
+debug debugalt
+depthalt while fromalt depthalt endwhile
+depth while drop depth endwhile
+
+10 20 30 drop
+debug
+depth while drop depth endwhile
+
+10 20 30 nip
+debug
+depth while drop depth endwhile
+
+10 20 30 40 over
+debug
+depth while drop depth endwhile
+
+10 20 30 40 2 pick
+debug
+depth while drop depth endwhile
+
+10 20 30 -1 pick
+debug
+depth while drop depth endwhile
+
+10 20 30 40 0 pick
+debug
+depth while drop depth endwhile
+
+10 20 30 40 2 roll
+debug
+depth while drop depth endwhile
+
+10 20 30 -1 roll
+debug
+depth while drop depth endwhile
+
+10 20 30 40 0 roll
+debug
+depth while drop depth endwhile
+
+10 20 30 40 2dup
+debug
+depth while drop depth endwhile
+
+10 20 30 40 3dup
+debug
+depth while drop depth endwhile
+
+10 20 30 40 rot
+debug
+depth while drop depth endwhile
+
+10 20 30 40 swap
+debug
+depth while drop depth endwhile
+
+10 20 30 40 50 60 2rot
+debug
+depth while drop depth endwhile
+
+10 20 30 40 2swap
+debug
+depth while drop depth endwhile
+
+10 20 30 40 tuck
+debug
+depth while drop depth endwhile
+
+10 20 30 40 2over
+debug
+depth while drop depth endwhile
+
+10 20 30 40 3 rotate
+debug
+depth while drop depth endwhile
+
+10 20 30 40 -3 rotate
+debug
+depth while drop depth endwhile
+
+10 20 30 40 3 revrotate
+debug
+depth while drop depth endwhile
+
+10 20 30 40 -3 revrotate
+debug
+depth while drop depth endwhile
+
+10 20 30 40 0 rotate
+debug
+depth while drop depth endwhile
+
+10 20 30 40 0 revrotate
+debug
+depth while drop depth endwhile
