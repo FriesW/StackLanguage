@@ -26,14 +26,14 @@
 | `OVER` | Copies *second* to top | 0 | 1 |
 | `PICK` | Copies the item *top* away from the top to top, negative *top* indexes from bottom | 0 | 1 |
 | `ROLL` | Moves the item *top* away from the top to top, negative *top* indexes from bottom | 0 | 1 |
-| `2DUP` | Duplicates both *top* and *second*, `x1 x2` &rarr; `x1 x2 x1 x2` | 0 | 2 |
-| `3DUP` | Duplicates the top 3 stack items, `x1 x2 x3` &rarr; `x1 x2 x3 x1 x2 x3` | 0 | 3 |
-| `ROT` | Top 3 stack items are rotated left, `x1 x2 x3` &rarr; `x2 x3 x1` | 0 | 0 |
+| `2DUP` | Duplicates both *top* and *second*, `t1 t0` &rarr; `t1 t0 t1 t0` | 0 | 2 |
+| `3DUP` | Duplicates the top 3 stack items, `t2 t1 t0` &rarr; `t2 t1 t0 t2 t1 t0` | 0 | 3 |
+| `ROT` | Top 3 stack items are rotated left, `t2 t1 t0` &rarr; `t1 t0 t2` | 0 | 0 |
 | `SWAP` | Swaps *top* and *second* in the stack | 0 | 0 |
-| `2ROT` | Fifth and sixth items back are moved to top, `x1 x2 x3 x4 x5 x6` &rarr; `x3 x4 x5 x6 x1 x2` | 0 | 0 |
-| `2SWAP` | Swaps the top two pairs, `x1 x2 x3 x4` &rarr; `x3 x4 x1 x2` | 0 | 0 |
-| `TUCK` | *top* is copied and inserted before *second*, `x1 x2` &rarr; `x2 x1 x2` | 0 | 1 |
-| `2OVER` | Copies the pair two items back to top, `x1 x2 x3 x4` &rarr; `x1 x2 x3 x4 x1 x2` | 0 | 2 |
+| `2ROT` | Fifth and sixth items back are moved to top, `t5 t4 t3 t2 t1 t0` &rarr; `t3 t2 t1 t0 t5 t4` | 0 | 0 |
+| `2SWAP` | Swaps the top two pairs, `t3 t2 t1 t0` &rarr; `t1 t0 t3 t2` | 0 | 0 |
+| `TUCK` | *top* is copied and inserted before *second*, `t1 t0` &rarr; `t0 t1 t0` | 0 | 1 |
+| `2OVER` | Copies the pair two items back to top, `t3 t2 t1 t0` &rarr; `t3 t2 t1 t0 t3 t2` | 0 | 2 |
 | `ROTATE` | Rotates the stack by *top*, *top* becomes *bottom* for positive values | 1 | 0 |
 | `REVROTATE` | Rotates the stack by *top*, *bottom* becomes *top* for positive values | 1 | 0 |
 | | **Category: Bitwise Operations** | | |
