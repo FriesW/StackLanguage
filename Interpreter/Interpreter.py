@@ -51,12 +51,20 @@ class Stack:
             n = n % self.height()
             self.s = self.s[n:] + self.s[:n]
     
-    def push(self, item):
-        self.s.append(item)
+    def push(self, *item):
+        for i in item:
+            self.s.append(i)
     
-    def pop(self):
-        self.__height_check()
-        return self.s.pop()
+    def pop(self, items = 1):
+        if items == 1:
+            self.__height_check()
+            return self.s.pop()
+        else:
+            o = []
+            for i in range(items):
+                self.__height_check()
+                o.append( self.s.pop() ) #Note: array pop, not Stack pop!
+            return o
     
     def peek(self):
         self.__height_check()
