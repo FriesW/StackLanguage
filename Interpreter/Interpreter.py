@@ -273,6 +273,8 @@ def evaluate(primary_stack, alternate_stack, commands):
             #Stack Section
             elif c == "DEPTH":
                 s.push( s.height() )
+            elif c == "DEPTHALT":
+                s.push( alt.height() )
             elif c == "DROP":
                 s.pop()
             elif c == "ROT":
@@ -294,8 +296,6 @@ def evaluate(primary_stack, alternate_stack, commands):
                 alt.push( s.pop() )
             elif c == "FROMALT":
                 s.push( alt.pop() )
-            elif c == "DEPTHALT":
-                s.push( alt.height() )
             
             
             #Bitwise Section
