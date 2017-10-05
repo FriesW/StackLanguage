@@ -1,11 +1,11 @@
 from Stack import Stack
-import re
-from pprint import pprint as pp
+import re, sys
 
+#User changeable
 MAX_STEPS = 10 ** 6
-SOURCE = "test.txt"
+DEFAULT_SOURCE = "instructions.txt"
 
-ops = [
+OPS = [
 "NOP", "IF", "NOTIF", "ELSE", "ENDIF", "WHILE", "ENDWHILE", "DO", "DOWHILE",
 "DEBUG", "DEBUGALT", "ECHO", "RETURN",
 "DEPTH", "DROP", "ROT", "REVROT", "SWAP", "DUP", "PICK", "ROLL", "TOALT", "FROMALT", "ALTDEPTH",
@@ -13,6 +13,10 @@ ops = [
 "MAX", "MIN", "GREATERTHANOREQUAL", "GREATERTHAN", "LESSTHANOREQUAL", "LESSTHAN", "EQUAL", "NOTEQUAL",
 "BOOLOR", "BOOLAND", "ONOTEQUAL",
 "NOT", "MOD", "DIV", "MUL", "EXP", "SUB", "ADD", "ABS", "NEGATE"]
+
+
+#Skip to the bottom for __main__ program
+
 
 # openFile (string):string - opens file and returns string of contents
 #       Exception on File/IO errors
@@ -22,6 +26,7 @@ ops = [
 #       Exception on nesting failure, ValueError
 # evaluate(Stack, Stack, commands):bool - evaluates commands on given stacks (primary, alternate). Returns True if halted, otherwise false.
 #       Exception on divide by zero, index error, empty stack, past bounds of stack, maximum execution steps, probably some other stuff I missed
+
 
 
 
@@ -65,7 +70,7 @@ def validateCommands(commands):
     pos = 0
     for c in commands:
         pos += 1
-        if c not in ops:
+        if c not in OPS:
             try:
                 int(c)
             except:
@@ -347,3 +352,73 @@ def evaluate(primary_stack, alternate_stack, commands):
         cp += 1
         
     return False #Did not HALT
+
+
+
+
+
+
+
+
+# __is_number(string):bool - tells if a string can be typecast to an int or not
+#       No exceptions, unless the world ends
+# __parse(string):array[string] - Wrapper for parseCommands(...) with fancy printing
+#       Exception on anyting parseCommands(...) would throw
+# __load_file(string):string - Wrapper for openFile(...) and __parse(...) with fancy printing
+#       Exception on anything openFile(...) or __parse(...) would throw
+
+
+def __is_number(string):
+    try:
+        int(string)
+        return True
+    except ValueError:
+        return False
+
+def __parse(string):
+    print "parsing... ",
+    sys.stdout.flush()
+    out = parseCommands(string)
+    print "success."
+    return out
+    
+def __load_file(string):
+    print "Opening file '" + string + "'... ",
+    sys.stdout.flush()
+    out = __parse( openFile(string) )
+    return out
+
+
+
+if __name__ == "__main__":
+    
+    p_stack = Stack()
+    a_stack = Stack()
+    
+    args = sys.argv[1:]
+    
+    #No arguments provided, load default
+    if len(args) == 0:
+        print "No arguments provided. Loading default file."
+        #Execute
+        evaluate(p_stack, a_stack, __load_file(DEFAULT_SOURCE) )
+    
+    #Otherwise, load in command line arguments
+    else:
+        execute_list = []
+        build = ""
+        for a in args:
+            if a in OPS or __is_number(a):
+                build += a + ' '
+            else:
+                if len(build) > 0:
+                    execute_list.append( __parse(build) )
+                    build = ""
+                execute_list.append( __load_file(a) )
+        #Execute
+        run = True
+        while run:
+            run = not evalute(p_stack, a_stack, execute_list.pop(0)) and len(execute_list) > 0
+            
+    
+    print "TERMINATED\n"
