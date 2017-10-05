@@ -14,7 +14,7 @@
 | `DEBUG` | Prints the primary stack's contents | 0 | 0 |
 | `DEBUGALT` | Prints the alternate stack's contents | 0 | 0 |
 | `ECHO` | Pops and prints *top* | 1 | 0 |
-| `RETURN` | Halts execution, prints a validity statement based on value of *top* being nonzero | 0 | 0 |
+| `RETURN` | Halts execution, prints a validity statement based on stack being at least one high with *top* being nonzero | 0 | 0 |
 | | **Category: Stack Operations** | | |
 | `DEPTH` | Pushes the size of the primary stack to the primary stack | 0 | 1 |
 | `DEPTHALT` | Pushes the size of the alternate stack to the primary stack | 0 | 1 |

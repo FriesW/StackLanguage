@@ -273,7 +273,7 @@ def evaluate(primary_stack, alternate_stack, commands):
                 print "Echo: " + str( s.pop() )
             elif c == "RETURN":
                 print "Execution halted " + \
-                    ( "VALID" if s.peek() != 0 else "INVALID" ) + \
+                    ( "VALID" if s.height() > 0 and s.peek() != 0 else "INVALID" ) + \
                     " with stack:\n== STACK BOTTOM ==\n" + \
                     s.contents() + \
                     "== STACK TOP ==\n"
