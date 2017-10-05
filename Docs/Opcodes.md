@@ -1,4 +1,4 @@
-| Opcode | Description | Items Poppoed | Items Pushed |
+| Opcode | Description | Items Popped | Items Pushed |
 | ------ | ----------- | -------------:| ------------:| 
 | | **Category: Flow Control** | | |
 | `NOP` | Do nothing | 0 | 0 |
