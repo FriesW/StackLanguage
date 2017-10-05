@@ -19,14 +19,18 @@ class Stack:
         return self.s[-1]
     
     def pick(self, n):
-        n = n % self.height()
-        self.push( self.s[-n] )
+        if n >= self.height() or n < -self.height():
+            raise IndexError("Pick past start of stack.")
+        if n < -self.height():
+            raise IndexError("Pick past end of stack.")
+        self.push( self.s[-n - 1] )
     
     def roll(self, n):
-        n = n % self.height()
-        tmp = self.s[-n]
-        self.s.remove(-n)
-        self.push(tmp)
+        if n >= self.height():
+            raise IndexError("Roll past start of stack.")
+        if n < -self.height():
+            raise IndexError("Roll past end of stack.")
+        self.push( self.s.pop(-n - 1) ) #Note: array pop, not Stack pop!
     
     def height(self):
         return len(self.s)
