@@ -404,7 +404,7 @@ def evaluate(primary_stack, alternate_stack, commands):
                 s.push(int( t0 != t1 ))
             elif c == "WITHIN":
                 t0, t1, t2 = s.pop(3)
-                s.push( int(t2 >= min(t0,t1) and t2 < max(t0, t1) )
+                s.push( int( t2 >= min(t0,t1) and t2 < max(t0, t1) ) )
             
             
             #Boolean Section
