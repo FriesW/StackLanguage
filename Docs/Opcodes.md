@@ -54,6 +54,7 @@
 | `LESSTHAN` | Pushes 1 if *top*`<`*second*, otherwise pushes 0 | 2 | 1 |
 | `EQUAL` | Pushes 1 if *top*`==`*second*, otherwise pushes 0 | 2 | 1 |
 | `NOTEQUAL` | Pushes 1 if *top*`!=`*second*, otherwise pushes 0 | 2 | 1 |
+| `WITHIN` | Pushes 1 if third from top is within range between *second* and *top*, left-inclusive| 3 | 1 |
 | | **Category: Boolean Operations** | | |
 | `BOOLOR` | Boolean or of *top* and *second*, where 0 is false and all else is true | 2 | 1 |
 | `BOOLAND` | Boolean and of *top* and *second*, where 0 is false and all else is true | 2 | 1 |

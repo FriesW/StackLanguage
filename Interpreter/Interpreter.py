@@ -15,7 +15,7 @@ OPS = [
 "DEBUG", "DEBUGALT", "ECHO", "RETURN",
 "DEPTH", "DEPTHALT", "TOALT", "FROMALT", "DROP", "NIP", "DUP", "OVER", "PICK", "ROLL", "2DUP", "3DUP", "ROT", "SWAP", "2ROT", "2SWAP", "TUCK", "2OVER", "ROTATE", "REVROTATE",
 "INVERT", "AND", "OR", "XOR", "RSHIFT", "LSHIFT",
-"MAX", "MIN", "GREATERTHANOREQUAL", "GREATERTHAN", "LESSTHANOREQUAL", "LESSTHAN", "EQUAL", "NOTEQUAL",
+"MAX", "MIN", "GREATERTHANOREQUAL", "GREATERTHAN", "LESSTHANOREQUAL", "LESSTHAN", "EQUAL", "NOTEQUAL", "WITHIN",
 "BOOLOR", "BOOLAND", "0NOTEQUAL",
 "NOT", "MOD", "DIV", "MUL", "EXP", "SUB", "ADD", "ABS", "NEGATE"]
 
@@ -402,6 +402,9 @@ def evaluate(primary_stack, alternate_stack, commands):
             elif c == "NOTEQUAL":
                 t0, t1 = s.pop(2)
                 s.push(int( t0 != t1 ))
+            elif c == "WITHIN":
+                t0, t1, t2 = s.pop(3)
+                s.push( int(t2 >= min(t0,t1) and t2 < max(t0, t1) )
             
             
             #Boolean Section
