@@ -1,0 +1,38 @@
+// Square root via the Babylonian Method
+//If value already on stack, then use it. Otherwise, use default value.
+depth
+notif //True if empty
+    68598
+endif
+
+//Number is used as starting point
+
+//Top of alt stack will always have the number to square root
+dup toalt
+
+do
+    
+    
+    dup dup //Copy previous
+    fromalt //Copy value from alt stack
+    dup
+    toalt
+    
+    swap //Divide const by previous
+    div
+    add //Add them together
+    2 div //Divide by 2
+    
+    //Compare if this cycle was same as last
+    2dup
+    lessThan //Continue only if top is getting smaller
+doWhile
+
+//If top got larger, remove it
+2dup
+greaterThanOrEqual
+if
+    drop
+endIf
+
+return
